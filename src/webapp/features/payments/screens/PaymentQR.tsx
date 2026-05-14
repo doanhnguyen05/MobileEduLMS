@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { QrCode, Copy, Check, Clock, AlertCircle } from 'lucide-react';
+import { Copy, Check, Clock, AlertCircle } from 'lucide-react';
 import { TopBar } from '../../../components/TopBar';
 import { Button } from '../../../components/ui/button';
 import { getPurchaseItem } from '../data/paymentCatalog';
+import techcombankQrImage from '../../../assets/payments/techcombank-qr-nguyen-viet-doanh.jpeg';
 
 export function PaymentQR() {
   const { id } = useParams();
@@ -35,9 +36,9 @@ export function PaymentQR() {
   };
 
   const bankInfo = {
-    bankName: 'Ngân hàng TMCP Á Châu (ACB)',
-    accountNumber: '123456789',
-    accountName: 'CONG TY EDUMOBILE',
+    bankName: 'Ngân hàng TMCP Kỹ thương Việt Nam (Techcombank)',
+    accountNumber: '9625 5066 88',
+    accountName: 'NGUYEN VIET DOANH',
     amount: item?.price ?? 0,
     content: paymentReference,
   };
@@ -152,11 +153,12 @@ export function PaymentQR() {
           <h3 className="font-bold text-gray-900 text-center mb-4">Quét mã QR để thanh toán</h3>
 
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-6 mb-6">
-            <div className="w-64 h-64 mx-auto bg-white rounded-2xl shadow-lg p-4 flex items-center justify-center">
-              <div className="text-center">
-                <QrCode className="w-48 h-48 mx-auto text-gray-900" />
-                <p className="text-xs text-gray-500 mt-2">Mã QR động</p>
-              </div>
+            <div className="mx-auto max-w-72 overflow-hidden rounded-2xl bg-white shadow-lg">
+              <img
+                src={techcombankQrImage}
+                alt={`Mã QR chuyển khoản Techcombank cho ${bankInfo.accountName}`}
+                className="h-auto w-full object-contain"
+              />
             </div>
           </div>
 

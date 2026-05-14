@@ -4,6 +4,7 @@ import type { Lesson } from '../entities/lesson';
 import type { AppNotification } from '../entities/notification';
 import type { Quiz } from '../entities/quiz';
 import type { TeacherCourse } from '../entities/teacher';
+import { resolveDemoVideoUrl } from './demoVideoCatalog';
 
 export const courses: Course[] = [
   {
@@ -288,7 +289,7 @@ export const courses: Course[] = [
   }
 ];
 
-export const lessons: Lesson[] = [
+const lessonSeeds: Lesson[] = [
   // React Native Cơ Bản
   {
     id: '1',
@@ -764,6 +765,11 @@ export const lessons: Lesson[] = [
     videoUrl: 'https://example.com/ecom8.mp4'
   }
 ];
+
+export const lessons: Lesson[] = lessonSeeds.map((lesson) => ({
+  ...lesson,
+  videoUrl: resolveDemoVideoUrl(lesson.id, lesson.videoUrl),
+}));
 
 export const quizzes: Quiz[] = [
   {
