@@ -145,6 +145,7 @@ export function LessonPlayer() {
             className="h-full w-full border-0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
             onLoad={() => setIsLoading(false)}
           />
         ) : (
@@ -270,7 +271,7 @@ export function LessonPlayer() {
         <div className="mb-4 rounded-2xl bg-blue-50 p-4">
           <p className="text-sm font-medium text-blue-900">Nguồn video demo</p>
           <p className="mt-1 text-sm text-blue-700">
-            Mỗi bài học được liên kết tới danh sách video phù hợp với nội dung bài đang học.
+            Mỗi bài học được gắn một video cụ thể theo đúng nội dung và phát trực tiếp trong app.
           </p>
         </div>
 
