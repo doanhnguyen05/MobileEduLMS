@@ -35,6 +35,10 @@ function isInternalUrl(url: string) {
     return true;
   }
 
+  if (url.includes('youtube.com/embed') || url.includes('youtube-nocookie.com/embed')) {
+    return true;
+  }
+
   return url.startsWith(APP_BASE_URL) || url.startsWith(`${APP_ORIGIN}#`) || url.startsWith(`${APP_ORIGIN}/#`);
 }
 
