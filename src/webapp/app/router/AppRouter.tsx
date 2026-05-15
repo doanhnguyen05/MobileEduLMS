@@ -21,7 +21,11 @@ export function AppRouter() {
           key={route.path}
           path={route.path}
           element={
-            route.requiresAuth ? <ProtectedRoute>{route.element}</ProtectedRoute> : route.element
+            route.requiresAuth ? (
+              <ProtectedRoute allowedRoles={route.allowedRoles}>{route.element}</ProtectedRoute>
+            ) : (
+              route.element
+            )
           }
         />
       ))}

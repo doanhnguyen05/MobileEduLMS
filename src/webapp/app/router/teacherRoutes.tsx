@@ -15,11 +15,14 @@ import { TeacherStudents } from '../../screens/TeacherStudents';
 import { WithdrawSuccess } from '../../screens/WithdrawSuccess';
 import type { AppRouteDefinition } from './types';
 
+const teacherAllowedRoles: AppRouteDefinition['allowedRoles'] = ['teacher'];
+
 export const teacherRoutes: AppRouteDefinition[] = [
   { path: '/teacher/dashboard', element: <TeacherDashboard />, requiresAuth: true },
   { path: '/teacher/courses', element: <TeacherCourses />, requiresAuth: true },
   { path: '/teacher/students', element: <TeacherStudents />, requiresAuth: true },
   { path: '/teacher/create-course', element: <CreateCourse />, requiresAuth: true },
+  { path: '/teacher/course/:id', element: <TeacherCourseAnalytics />, requiresAuth: true },
   { path: '/teacher/course/:id/edit', element: <EditCourse />, requiresAuth: true },
   { path: '/teacher/course/:id/analytics', element: <TeacherCourseAnalytics />, requiresAuth: true },
   { path: '/teacher/course/:id/reviews', element: <CourseReviews />, requiresAuth: true },
@@ -32,4 +35,7 @@ export const teacherRoutes: AppRouteDefinition[] = [
   { path: '/teacher/student/:id/detail', element: <StudentDetail />, requiresAuth: true },
   { path: '/teacher/student/:id/stats', element: <StudentCourseStats />, requiresAuth: true },
   { path: '/teacher/student/:id/report', element: <ReportStudent />, requiresAuth: true },
-];
+].map((route) => ({
+  ...route,
+  allowedRoles: teacherAllowedRoles,
+}));

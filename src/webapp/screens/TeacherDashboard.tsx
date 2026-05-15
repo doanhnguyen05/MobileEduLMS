@@ -95,7 +95,7 @@ export function TeacherDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + index * 0.1 }}
-              onClick={() => navigate(`/teacher/course/${course.id}`)}
+              onClick={() => navigate(`/teacher/course/${course.id}/analytics`)}
               className="bg-white rounded-3xl shadow-sm p-5 cursor-pointer hover:shadow-md transition-shadow"
             >
               <div className="flex items-start justify-between mb-4">

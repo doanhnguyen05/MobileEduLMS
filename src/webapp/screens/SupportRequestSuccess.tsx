@@ -3,10 +3,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { CheckCircle, Home, MessageCircle, Clock, Mail } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import { getDefaultPathForRole, useAuth } from '../features/auth';
 
 export function SupportRequestSuccess() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
 
   const ticketData = location.state || {
     ticketId: 'SUP-12345678',
@@ -148,7 +150,7 @@ export function SupportRequestSuccess() {
           </Button>
 
           <Button
-            onClick={() => navigate('/home')}
+            onClick={() => navigate(getDefaultPathForRole(user?.role))}
             variant="outline"
             className="w-full h-12 rounded-2xl flex items-center justify-center gap-2 text-gray-600"
           >

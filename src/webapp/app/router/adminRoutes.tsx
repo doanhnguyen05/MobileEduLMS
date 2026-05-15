@@ -15,6 +15,8 @@ import { UserCreatedSuccess } from '../../screens/UserCreatedSuccess';
 import { UserPermissions } from '../../screens/UserPermissions';
 import type { AppRouteDefinition } from './types';
 
+const adminAllowedRoles: AppRouteDefinition['allowedRoles'] = ['admin'];
+
 export const adminRoutes: AppRouteDefinition[] = [
   { path: '/admin/dashboard', element: <AdminDashboard />, requiresAuth: true },
   { path: '/admin/users', element: <AdminUsers />, requiresAuth: true },
@@ -32,4 +34,7 @@ export const adminRoutes: AppRouteDefinition[] = [
   { path: '/admin/reports/growth', element: <AdminGrowthReport />, requiresAuth: true },
   { path: '/admin/report-management', element: <AdminReportManagement />, requiresAuth: true },
   { path: '/admin/report-detail/:id', element: <AdminReportDetail />, requiresAuth: true },
-];
+].map((route) => ({
+  ...route,
+  allowedRoles: adminAllowedRoles,
+}));
