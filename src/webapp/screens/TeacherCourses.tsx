@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Plus, BookOpen, Users, Star, MoreVertical, Edit, Trash2, Eye, Copy, Archive, Share2, MessageSquare } from 'lucide-react';
+import { Plus, BookOpen, Users, Star, MoreVertical, Edit, Trash2, Eye, Archive, Share2, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { TopBar } from '../components/TopBar';
 import { BottomNav } from '../components/BottomNav';
@@ -9,6 +9,16 @@ import { teacherCourses } from '../data/mockData';
 export function TeacherCourses() {
   const navigate = useNavigate();
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+  const [courses, setCourses] = useState(teacherCourses);
+
+  const handleDeleteCourse = (courseId: string) => {
+    if (!confirm('Bạn có chắc chắn muốn xóa khóa học này?')) {
+      return;
+    }
+
+    setCourses((currentCourses) => currentCourses.filter((course) => course.id !== courseId));
+    setOpenMenuId(null);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
@@ -18,7 +28,7 @@ export function TeacherCourses() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Quản lý khóa học</h2>
-            <p className="text-gray-600 text-sm">{teacherCourses.length} khóa học</p>
+            <p className="text-gray-600 text-sm">{courses.length} khóa học</p>
           </div>
           <button
             onClick={() => navigate('/teacher/create-course')}
@@ -29,13 +39,13 @@ export function TeacherCourses() {
         </div>
 
         <div className="space-y-4">
-          {teacherCourses.map((course, index) => (
+          {courses.map((course, index) => (
             <motion.div
               key={course.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-3xl shadow-sm overflow-hidden"
+              className="bg-white rounded-3xl shadow-sm"
             >
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
@@ -143,12 +153,7 @@ export function TeacherCourses() {
 
                             <div className="border-t border-gray-100">
                               <button
-                                onClick={() => {
-                                  if (confirm('Bạn có chắc chắn muốn xóa khóa học này?')) {
-                                    console.log('Delete course');
-                                    setOpenMenuId(null);
-                                  }
-                                }}
+                                onClick={() => handleDeleteCourse(course.id)}
                                 className="w-full flex items-center gap-3 px-4 py-3 hover:bg-red-50 transition-colors text-left"
                               >
                                 <Trash2 className="w-4 h-4 text-red-600" />
