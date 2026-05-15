@@ -2,31 +2,10 @@
 
 `mobileEduLMS` hiện đã được chuyển sang mô hình chạy bằng `Expo SDK 54` để bạn có thể mở `Expo Go` và quét QR trực tiếp trên điện thoại.
 
-## Kiến trúc hiện tại
+## Dự án đã được deyloy lên vercel và chạy ổn định
+https://mobile-edu-lms.vercel.app
 
-Dự án gốc là một ứng dụng web React được xuất ra từ Figma/Vite. Để chuyển sang Expo nhanh, ổn định và vẫn giữ nguyên toàn bộ giao diện hiện có, dự án đang dùng kiến trúc hybrid:
-
-- `Expo SDK 54` làm shell native để chạy trên `Android` và `iOS`.
-- `react-native-webview` dùng để hiển thị toàn bộ giao diện web bên trong app Expo.
-- `Vite` build ứng dụng web thành một file HTML self-contained.
-- Script `scripts/generate-webview-html.mjs` nhúng file HTML đó vào `src/native/generated/webAppHtml.ts`.
-
-Nói ngắn gọn: đây là một app Expo chạy được bằng QR code trong `Expo Go`, nhưng phần UI nghiệp vụ vẫn là code web hiện có, chưa phải rewrite 100% sang React Native thuần.
-
-## Yêu cầu môi trường
-
-- `Node.js 20.19+`
-- `npm`
-- Ứng dụng `Expo Go` trên điện thoại
-- Điện thoại và máy tính cùng mạng Wi-Fi nếu dùng chế độ `LAN`
-
-Repo đã có file `.nvmrc`, vì vậy nếu bạn dùng `nvm` thì chỉ cần:
-
-```bash
-nvm use
-```
-
-Nếu máy đang dùng `Node 25` hoặc một bản quá mới khiến Expo CLI hoạt động không ổn định, hãy chuyển về `Node 20.19.x` hoặc `Node 22 LTS`.
+do nhóm chưa có kinh phí để buil test trên App Store và Ch Play
 
 ## Chạy nhanh để quét mã QR
 
@@ -111,66 +90,6 @@ npx tsc --noEmit
 
 Kiểm tra TypeScript.
 
-## Cấu trúc thư mục quan trọng
-
-```text
-.
-├── App.tsx                           # Shell Expo native
-├── app.json                          # Cấu hình Expo
-├── scripts/
-│   └── generate-webview-html.mjs     # Tạo file HTML nhúng cho Expo
-├── src/
-│   ├── main.tsx                      # Entry của web app Vite
-│   ├── webapp/                       # Toàn bộ màn hình và component web hiện tại
-│   ├── native/
-│   │   └── generated/
-│   │       └── webAppHtml.ts         # File auto-generated cho WebView
-│   └── styles/                       # CSS/Tailwind cho web app
-└── vite.config.ts                    # Cấu hình build web thành single HTML
-```
-
-## Kiến trúc nội bộ của web app
-
-Phần `src/webapp` đã được tách lại theo trách nhiệm rõ hơn:
-
-```text
-src/webapp/
-├── app/                # Composition root: providers, router, app shell
-├── entities/           # Kiểu dữ liệu và đối tượng nghiệp vụ cốt lõi
-├── features/           # Nghiệp vụ theo module: auth, payments, profile, reports...
-├── screens/            # Màn hình hiện tại của ứng dụng
-├── components/         # UI dùng lại
-├── data/               # Catalog dữ liệu mock đã được gắn type
-└── hooks/              # Hook dùng chung cho web app
-```
-
-Các thay đổi chính:
-
-- `src/webapp/App.tsx` giờ chỉ còn là entry mỏng, không ôm router và auth nữa
-- router được tách sang `src/webapp/app/router/*`
-- provider được gom vào `src/webapp/app/providers/*`
-- `User`, `Course`, `Lesson`, `Quiz`, `Notification`, `TeacherCourse`, `AdminStats` đã có entity type riêng trong `src/webapp/entities/*`
-- auth được chuyển thành feature độc lập tại `src/webapp/features/auth/*`
-- `src/webapp/data/mockData.ts` giờ phụ thuộc vào entity types thay vì object tự do
-
-Mục tiêu của cách tách này là:
-
-- giảm coupling của `App.tsx`
-- tách session/auth khỏi entity `User`
-- gom route theo domain thay vì một file registry dài
-- tạo chỗ rõ ràng để tiếp tục tách từng feature sau này
-
-## Luồng build Expo hiện tại
-
-Khi chạy `npm run start`, pipeline diễn ra như sau:
-
-1. `Vite` build mã nguồn web trong `src/webapp`
-2. Plugin `vite-plugin-singlefile` gộp JS/CSS vào `dist/index.html`
-3. Script `generate-webview-html.mjs` đọc `dist/index.html`
-4. Script sinh ra `src/native/generated/webAppHtml.ts`
-5. `App.tsx` nạp chuỗi HTML này vào `WebView`
-6. `Expo Go` mở app qua QR code
-
 ## Công nghệ đang dùng
 
 ### Native shell
@@ -214,8 +133,6 @@ hoặc:
 npm run prepare:expo
 ```
 
-để tạo lại file HTML nhúng mới nhất.
-
 ### Khi nào dùng `dev:web`
 
 Nếu bạn muốn chỉnh UI thật nhanh trong trình duyệt, dùng:
@@ -236,34 +153,16 @@ npm run prepare:expo
 
 - App hiện chạy qua `WebView`, nên đây chưa phải bản React Native thuần.
 - Một số tài nguyên như avatar, ảnh khóa học hoặc font từ nguồn ngoài vẫn cần internet.
-- Nếu terminal hiện cảnh báo `watchman` liên quan quyền truy cập thư mục macOS, đó thường không chặn Expo chạy; chỉ là cảnh báo theo dõi file.
 
-## Trạng thái kiểm tra đã chạy
-
-Dự án đã được kiểm tra với các bước sau:
-
-- `npm run prepare:expo`
-- `npm run doctor`
-- `npx tsc --noEmit`
-- `expo start` khởi động thành công và hiển thị QR code
 
 ## Gợi ý quy trình làm việc
 
 1. `nvm use`
 2. `npm install`
-3. `npm run start:tunnel`
+3. `npm run start`
 4. Mở `Expo Go`
 5. Quét QR
-
-Nếu bạn muốn, bước tiếp theo có thể là tách dần từng màn từ `WebView` sang `React Native` thật để tiến tới app native hoàn toàn.
-
-## Cải tiến chất lượng hiện có
-
-- Đăng nhập demo đã có kiểm tra email, mật khẩu tối thiểu 6 ký tự và vai trò đăng nhập.
-- Route học viên, giảng viên và admin đã có guard theo vai trò; tài khoản không đúng vai trò sẽ bị chuyển về dashboard phù hợp.
-- Màn tin nhắn đã gửi được chat demo, lưu hội thoại bằng `localStorage`, cập nhật tin nhắn cuối và có phản hồi tự động.
-- `expo` được ghim đúng patch `~54.0.34` để `expo-doctor` không báo lệch phiên bản SDK.
-- Dự án có test tự động cho login validation và role-based route access.
+      
 
 Các lệnh nên chạy trước khi nộp:
 
