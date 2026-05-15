@@ -1,8 +1,8 @@
-import { ForgotPassword } from '../../screens/ForgotPassword';
-import { Login } from '../../screens/Login';
-import { Onboarding } from '../../screens/Onboarding';
-import { Register } from '../../screens/Register';
-import { Splash } from '../../screens/Splash';
+import { ForgotPassword } from '../../screens/common/ForgotPassword';
+import { Login } from '../../screens/common/Login';
+import { Onboarding } from '../../screens/common/Onboarding';
+import { Register } from '../../screens/common/Register';
+import { Splash } from '../../screens/common/Splash';
 import type { AppRouteDefinition } from './types';
 
 export const publicRoutes: AppRouteDefinition[] = [
