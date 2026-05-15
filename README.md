@@ -182,7 +182,7 @@ Khi chạy `npm run start`, pipeline diễn ra như sau:
 ### Web UI hiện có
 
 - `React 19.1.0`
-- `Vite 6.3.5`
+- `Vite 6.4.2`
 - `Tailwind CSS 4.1.12`
 - `React Router 7`
 - `MUI 7`
@@ -256,3 +256,25 @@ Dự án đã được kiểm tra với các bước sau:
 5. Quét QR
 
 Nếu bạn muốn, bước tiếp theo có thể là tách dần từng màn từ `WebView` sang `React Native` thật để tiến tới app native hoàn toàn.
+
+## Cải tiến chất lượng hiện có
+
+- Đăng nhập demo đã có kiểm tra email, mật khẩu tối thiểu 6 ký tự và vai trò đăng nhập.
+- Route học viên, giảng viên và admin đã có guard theo vai trò; tài khoản không đúng vai trò sẽ bị chuyển về dashboard phù hợp.
+- Màn tin nhắn đã gửi được chat demo, lưu hội thoại bằng `localStorage`, cập nhật tin nhắn cuối và có phản hồi tự động.
+- `expo` được ghim đúng patch `~54.0.34` để `expo-doctor` không báo lệch phiên bản SDK.
+- Dự án có test tự động cho login validation và role-based route access.
+
+Các lệnh nên chạy trước khi nộp:
+
+```bash
+npm run test
+npx tsc --noEmit
+npm run doctor
+npm run prepare:expo
+```
+
+
+Học viên: student@edumobile.vn / 123456
+Giảng viên: teacher@edumobile.vn / 123456
+Admin: admin@edumobile.vn / 123456

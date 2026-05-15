@@ -1,41 +1,37 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Mail, Lock, Eye, EyeOff, Chrome, Github } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, Chrome, Github, AlertCircle } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { useAuth } from '../features/auth';
+import { getDefaultPathForRole, useAuth, validateLoginInput, type LoginValidationErrors } from '../features/auth';
 
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState<'student' | 'teacher' | 'admin'>('student');
+  const [errors, setErrors] = useState<LoginValidationErrors>({});
   const navigate = useNavigate();
   const { login } = useAuth();
+  const hasLoginErrors = Object.values(errors).some(Boolean);
 
   const handleLogin = () => {
-    login(email, password, selectedRole);
-    if (selectedRole === 'teacher') {
-      navigate('/teacher/dashboard');
-    } else if (selectedRole === 'admin') {
-      navigate('/admin/dashboard');
-    } else {
-      navigate('/home');
+    const validation = validateLoginInput({ email, password, role: selectedRole });
+    setErrors(validation.errors);
+
+    if (!validation.isValid) {
+      return;
     }
+
+    login(email.trim(), password, selectedRole);
+    navigate(getDefaultPathForRole(selectedRole), { replace: true });
   };
 
   const handleSocialLogin = (provider: 'google' | 'github') => {
-    console.log(`Logging in with ${provider}`);
-    // Simulate social login
-    login(`user@${provider}.com`, '', selectedRole);
-    if (selectedRole === 'teacher') {
-      navigate('/teacher/dashboard');
-    } else if (selectedRole === 'admin') {
-      navigate('/admin/dashboard');
-    } else {
-      navigate('/home');
-    }
+    setErrors({});
+    login(`user@${provider}.com`, 'social-login', selectedRole);
+    navigate(getDefaultPathForRole(selectedRole), { replace: true });
   };
 
   return (
@@ -65,11 +61,23 @@ export function Login() {
           </div>
 
           <div className="space-y-4 mb-6">
+            {hasLoginErrors && (
+              <div className="flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-red-700">
+                <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0" />
+                <p className="text-sm font-medium" aria-live="polite">
+                  Vui lòng kiểm tra lại thông tin đăng nhập.
+                </p>
+              </div>
+            )}
+
             <div className="bg-gray-100 rounded-2xl p-1 flex gap-1">
               {(['student', 'teacher', 'admin'] as const).map((role) => (
                 <button
                   key={role}
-                  onClick={() => setSelectedRole(role)}
+                  onClick={() => {
+                    setSelectedRole(role);
+                    setErrors((currentErrors) => ({ ...currentErrors, role: undefined }));
+                  }}
                   className={`flex-1 py-2 rounded-xl text-sm font-medium transition-all ${
                     selectedRole === role
                       ? 'bg-white text-blue-600 shadow-sm'
@@ -87,9 +95,15 @@ export function Login() {
                 type="email"
                 placeholder="Email của bạn"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="pl-12 h-14 rounded-2xl border-gray-200"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setErrors((currentErrors) => ({ ...currentErrors, email: undefined }));
+                }}
+                className={`pl-12 h-14 rounded-2xl border-gray-200 ${
+                  errors.email ? 'border-red-300 focus-visible:ring-red-400' : ''
+                }`}
               />
+              {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
             </div>
 
             <div className="relative">
@@ -98,8 +112,13 @@ export function Login() {
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Mật khẩu"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="pl-12 pr-12 h-14 rounded-2xl border-gray-200"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setErrors((currentErrors) => ({ ...currentErrors, password: undefined }));
+                }}
+                className={`pl-12 pr-12 h-14 rounded-2xl border-gray-200 ${
+                  errors.password ? 'border-red-300 focus-visible:ring-red-400' : ''
+                }`}
               />
               <button
                 onClick={() => setShowPassword(!showPassword)}
@@ -111,6 +130,7 @@ export function Login() {
                   <Eye className="w-5 h-5 text-gray-400" />
                 )}
               </button>
+              {errors.password && <p className="mt-2 text-sm text-red-600">{errors.password}</p>}
             </div>
 
             <div className="flex justify-end">

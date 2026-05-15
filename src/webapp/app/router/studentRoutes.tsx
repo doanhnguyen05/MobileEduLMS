@@ -19,6 +19,10 @@ import { SupportRequest } from '../../screens/SupportRequest';
 import { SupportRequestSuccess } from '../../screens/SupportRequestSuccess';
 import type { AppRouteDefinition } from './types';
 
+const studentAllowedRoles: AppRouteDefinition['allowedRoles'] = ['student'];
+const studentTeacherAllowedRoles: AppRouteDefinition['allowedRoles'] = ['student', 'teacher'];
+const allAuthenticatedRoles: AppRouteDefinition['allowedRoles'] = ['student', 'teacher', 'admin'];
+
 export const studentRoutes: AppRouteDefinition[] = [
   { path: '/home', element: <StudentHome />, requiresAuth: true },
   { path: '/courses', element: <CourseList />, requiresAuth: true },
@@ -26,21 +30,21 @@ export const studentRoutes: AppRouteDefinition[] = [
   { path: '/lesson/:id', element: <LessonPlayer />, requiresAuth: true },
   { path: '/quiz/:id', element: <QuizScreen />, requiresAuth: true },
   { path: '/notifications', element: <Notifications />, requiresAuth: true },
-  { path: '/messages', element: <Messages />, requiresAuth: true },
-  { path: '/messages/:id', element: <MessageDetail />, requiresAuth: true },
+  { path: '/messages', element: <Messages />, requiresAuth: true, allowedRoles: studentTeacherAllowedRoles },
+  { path: '/messages/:id', element: <MessageDetail />, requiresAuth: true, allowedRoles: studentTeacherAllowedRoles },
   { path: '/progress', element: <Progress />, requiresAuth: true },
   { path: '/search', element: <SearchAdvanced />, requiresAuth: true },
   { path: '/bookmarks', element: <Bookmarks />, requiresAuth: true },
   { path: '/course/:id/rate', element: <RateCourse />, requiresAuth: true },
   { path: '/course/:id/reviews', element: <StudentCourseReviews />, requiresAuth: true },
-  { path: '/profile', element: <Profile />, requiresAuth: true },
-  { path: '/edit-profile', element: <EditProfile />, requiresAuth: true },
-  { path: '/settings', element: <Settings />, requiresAuth: true },
-  { path: '/settings/:settingId', element: <SettingsDetail />, requiresAuth: true },
-  { path: '/security', element: <SecuritySettings />, requiresAuth: true },
-  { path: '/subscription', element: <Subscription />, requiresAuth: true },
-  { path: '/certificates', element: <Certificates />, requiresAuth: true },
-  { path: '/about', element: <AboutApp />, requiresAuth: true },
+  { path: '/profile', element: <Profile />, requiresAuth: true, allowedRoles: allAuthenticatedRoles },
+  { path: '/edit-profile', element: <EditProfile />, requiresAuth: true, allowedRoles: allAuthenticatedRoles },
+  { path: '/settings', element: <Settings />, requiresAuth: true, allowedRoles: allAuthenticatedRoles },
+  { path: '/settings/:settingId', element: <SettingsDetail />, requiresAuth: true, allowedRoles: allAuthenticatedRoles },
+  { path: '/security', element: <SecuritySettings />, requiresAuth: true, allowedRoles: allAuthenticatedRoles },
+  { path: '/subscription', element: <Subscription />, requiresAuth: true, allowedRoles: allAuthenticatedRoles },
+  { path: '/certificates', element: <Certificates />, requiresAuth: true, allowedRoles: allAuthenticatedRoles },
+  { path: '/about', element: <AboutApp />, requiresAuth: true, allowedRoles: allAuthenticatedRoles },
   { path: '/help', element: <HelpCenterNew />, requiresAuth: true },
   { path: '/help/support-request', element: <SupportRequest />, requiresAuth: true },
   { path: '/help/support-success', element: <SupportRequestSuccess />, requiresAuth: true },
@@ -53,4 +57,7 @@ export const studentRoutes: AppRouteDefinition[] = [
   { path: '/payment/manual/:id', element: <PaymentManual />, requiresAuth: true },
   { path: '/payment/bank-transfer/:id', element: <PaymentBankTransfer />, requiresAuth: true },
   { path: '/payment/success/:id', element: <PaymentSuccess />, requiresAuth: true },
-];
+].map((route) => ({
+  ...route,
+  allowedRoles: route.allowedRoles ?? studentAllowedRoles,
+}));
