@@ -5,6 +5,7 @@ import { AlertTriangle, CalendarDays, CheckCircle, Clock, Eye, FileImage, Home, 
 import { BottomNav } from '../../../components/BottomNav';
 import { TopBar } from '../../../components/TopBar';
 import { Button } from '../../../components/ui/button';
+import { getDefaultPathForRole, useAuth } from '../../../features/auth';
 import { formatReportDate, getReportTypeLabel, getUserReportById, type ReportStatus } from '../data/reportStore';
 
 function getStatusConfig(status: ReportStatus) {
@@ -23,6 +24,7 @@ function getStatusConfig(status: ReportStatus) {
 export function MyReportDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const report = useMemo(() => (id ? getUserReportById(id) : undefined), [id]);
 
   if (!report) {
@@ -169,7 +171,7 @@ export function MyReportDetail() {
             Về danh sách
           </Button>
           <Button
-            onClick={() => navigate('/home')}
+            onClick={() => navigate(getDefaultPathForRole(user?.role))}
             className="h-12 rounded-2xl flex items-center gap-2"
           >
             <Home className="w-4 h-4" />

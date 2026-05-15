@@ -3,10 +3,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { AlertTriangle, CheckCircle, Home, ArrowRight, FileText } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
+import { getDefaultPathForRole, useAuth } from '../../../features/auth';
 
 export function ReportSuccessGeneral() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
 
   const reportData = location.state || {
     reportedItem: 'Khóa học React Native',
@@ -162,7 +164,7 @@ export function ReportSuccessGeneral() {
           </Button>
 
           <Button
-            onClick={() => navigate('/home')}
+            onClick={() => navigate(getDefaultPathForRole(user?.role))}
             variant="outline"
             className="w-full h-12 rounded-2xl flex items-center justify-center gap-2 text-gray-600"
           >
