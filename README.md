@@ -2,11 +2,11 @@
 
 ## Thành viên nhóm và phân công công việc
 
-| Thành viên | Vai trò | Công việc thực hiện |
-|---|---|---|
-| Nguyễn Hoàng Dũng | Thành viên | Thiết kế giao diện UI/UX, xử lý luồng phân quyền, đăng nhập và tối ưu responsive giao diện web/mobile. |
-| Nguyễn Viết Doanh | Thành viên | Phát triển chức năng hệ thống, tích hợp Expo SDK 54, cấu hình WebView, xử lý build/deploy. |
-| Phạm Quang Huy | Thành viên | Kiểm thử chức năng, xử lý dữ liệu, hỗ trợ triển khai hệ thống và viết tài liệu báo cáo dự án. |
+| Thành viên | MSSV | Vai trò | Công việc thực hiện |
+|---|---|---|---|
+| Nguyễn Hoàng Dũng | 23810310338 | Thành viên | Thiết kế giao diện UI/UX, xử lý luồng phân quyền, đăng nhập và tối ưu responsive giao diện web/mobile. |
+| Nguyễn Viết Doanh | 23810310376 | Thành viên | Phát triển chức năng hệ thống, tích hợp Expo SDK 54, cấu hình WebView, xử lý build/deploy. |
+| Phạm Quang Huy | 23810310347 | Thành viên | Kiểm thử chức năng, xử lý dữ liệu, hỗ trợ triển khai hệ thống và viết tài liệu báo cáo dự án. |
 
 ## Giới thiệu dự án
 
@@ -179,3 +179,22 @@ Kiểm tra tính tương thích dependency với Expo SDK 54.
 - Bản mobile hiện chạy qua WebView, chưa phải React Native thuần hoàn toàn.
 - Một số tài nguyên như avatar, ảnh khóa học hoặc font từ nguồn ngoài cần kết nối internet.
 
+## Hình ảnh minh họa hệ thống
+<img width="548" height="877" alt="image" src="https://github.com/user-attachments/assets/ed0bd46a-afc2-4ea9-b2a8-dfbaf1a26200" />
+<img width="510" height="836" alt="image" src="https://github.com/user-attachments/assets/129ccefd-badf-4319-8601-56a0758408b1" />
+<img width="482" height="880" alt="image" src="https://github.com/user-attachments/assets/ff476846-a7d5-425f-a768-5cc7b191f6e1" />
+<img width="501" height="806" alt="image" src="https://github.com/user-attachments/assets/20b30ce3-f03b-4c15-aaeb-1a40c7e2e174" />
+<img width="495" height="765" alt="image" src="https://github.com/user-attachments/assets/f7a706fc-509a-42d6-9fff-ad72f782a2ed" />
+<img width="519" height="865" alt="image" src="https://github.com/user-attachments/assets/4b08bd65-adff-4e50-9849-6ec0aae36e2e" />
+<img width="506" height="878" alt="image" src="https://github.com/user-attachments/assets/f0643e38-8747-4993-82e5-b2dbc951856d" />
+<img width="507" height="869" alt="image" src="https://github.com/user-attachments/assets/ef76459d-631c-4720-a8c3-3cfdfd8d8338" />
+<img width="504" height="883" alt="image" src="https://github.com/user-attachments/assets/803513bf-d9c2-4760-879d-4b52e54400c6" />
+<img width="494" height="864" alt="image" src="https://github.com/user-attachments/assets/d023efd5-1548-4dd4-a279-b4b641f77fdd" />
+<img width="493" height="870" alt="image" src="https://github.com/user-attachments/assets/78f137db-71b8-42f5-a8c5-d06909a9e808" />
+<img width="500" height="872" alt="image" src="https://github.com/user-attachments/assets/7ea375ed-a088-4aa8-9da1-74bc7e97d10c" />
+<img width="504" height="872" alt="image" src="https://github.com/user-attachments/assets/bf58cae4-4562-4a6e-81c8-3f75b757b6d2" />
+<img width="496" height="877" alt="image" src="https://github.com/user-attachments/assets/ae90e1b4-b9fc-4717-bd19-d62985c6dea7" />
+
+
+## link video: 
+https://drive.google.com/drive/folders/1-xg5ffHNPj9GmbY1AcpL73AJPwPwMgqC?usp=sharing
