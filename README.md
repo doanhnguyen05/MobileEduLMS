@@ -4,7 +4,7 @@
 
 | Thành viên | Vai trò | Công việc thực hiện |
 |---|---|---|
-| Nguyễn Hoàng Dũng | Thành viên | Thiết kế giao diện UI/UX, xây dựng các màn hình học viên và tối ưu responsive giao diện web/mobile. |
+| Nguyễn Hoàng Dũng | Thành viên | Thiết kế giao diện UI/UX, xử lý luồng phân quyền, đăng nhập,... và tối ưu responsive giao diện web/mobile. |
 | Nguyễn Viết Doanh | Thành viên | Phát triển chức năng hệ thống, tích hợp Expo SDK 54, cấu hình WebView, xử lý build/deploy. |
 | Phạm Quang Huy | Thành viên | Kiểm thử chức năng, xử lý dữ liệu và hỗ trợ triển khai hệ thống và viết tài liệu báo cáo dự án. |
 
