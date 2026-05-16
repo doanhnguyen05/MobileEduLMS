@@ -179,6 +179,9 @@ Kiểm tra tính tương thích dependency với Expo SDK 54.
 - Bản mobile hiện chạy qua WebView, chưa phải React Native thuần hoàn toàn.
 - Một số tài nguyên như avatar, ảnh khóa học hoặc font từ nguồn ngoài cần kết nối internet.
 
+## Link video demo:
+https://drive.google.com/file/d/14_8yL5qiAA8duvaMYtV5W6u5cvocJkak/view?usp=sharing
+
 ## Hình ảnh minh họa hệ thống
 <img width="548" height="877" alt="image" src="https://github.com/user-attachments/assets/ed0bd46a-afc2-4ea9-b2a8-dfbaf1a26200" />
 <img width="510" height="836" alt="image" src="https://github.com/user-attachments/assets/129ccefd-badf-4319-8601-56a0758408b1" />
@@ -196,5 +199,3 @@ Kiểm tra tính tương thích dependency với Expo SDK 54.
 <img width="496" height="877" alt="image" src="https://github.com/user-attachments/assets/ae90e1b4-b9fc-4717-bd19-d62985c6dea7" />
 
 
-## link video: 
-https://drive.google.com/drive/folders/1-xg5ffHNPj9GmbY1AcpL73AJPwPwMgqC?usp=sharing
