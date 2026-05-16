@@ -1,11 +1,22 @@
-# mobileEduLMS
+# mobileEduLMS - Ứng dụng học tập trực tuyến trên mobile
 
-`mobileEduLMS` hiện đã được chuyển sang mô hình chạy bằng `Expo SDK 54` để bạn có thể mở `Expo Go` và quét QR trực tiếp trên điện thoại.
+## Thành viên nhóm và phân công công việc
 
-## Dự án đã được deyloy lên vercel và chạy ổn định
+| Thành viên | Vai trò | Công việc thực hiện |
+|---|---|---|
+| Nguyễn Hoàng Dũng | Thành viên | Thiết kế giao diện UI/UX, xây dựng các màn hình học viên và tối ưu responsive giao diện web/mobile. |
+| Nguyễn Viết Doanh | Thành viên | Phát triển chức năng hệ thống, tích hợp Expo SDK 54, cấu hình WebView, xử lý build/deploy. |
+| Phạm Quang Huy | Thành viên | Kiểm thử chức năng, xử lý dữ liệu và hỗ trợ triển khai hệ thống và viết tài liệu báo cáo dự án. |
+
+## Giới thiệu dự án
+
+`mobileEduLMS` là ứng dụng hỗ trợ học tập trực tuyến trên thiết bị di động. Dự án hiện đã được chuyển sang mô hình chạy bằng `Expo SDK 54`, cho phép mở bằng `Expo Go` và quét mã QR trực tiếp trên điện thoại.
+
+Dự án đã được deploy lên Vercel và hiện đang chạy ổn định tại:
+
 https://mobile-edu-lms.vercel.app
 
-do nhóm chưa có kinh phí để buil test trên App Store và Ch Play
+Do nhóm chưa có kinh phí để build và kiểm thử bản phát hành chính thức trên App Store và CH Play, phiên bản hiện tại được triển khai dưới dạng Web App và chạy thử trên thiết bị di động thông qua Expo Go.
 
 ## Chạy nhanh để quét mã QR
 
@@ -173,7 +184,7 @@ npm run doctor
 npm run prepare:expo
 ```
 
-
+Tài khoản demo:
 Học viên: student@edumobile.vn / 123456
 Giảng viên: teacher@edumobile.vn / 123456
 Admin: admin@edumobile.vn / 123456
