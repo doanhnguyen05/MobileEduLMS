@@ -106,3 +106,7 @@ button, a {
 input, textarea {
   font-size: 16px !important;
 }
+
+html, body {
+  overflow-anchor: none;
+}
